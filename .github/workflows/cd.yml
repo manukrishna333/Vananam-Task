@@ -1,0 +1,26 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Pull Docker image from DockerHub
+      run: docker pull manukrishna333/my-node-app
+
+    - name: Deploy to staging
+      run: |
+        docker stop my-node-app || true
+        docker rm my-node-app || true
+        docker run -d --name my-node-app -p 8080:8080 manukrishna333/my-node-app
+
+    - name: Verify deployment
+      run: curl -f http://localhost:8080
