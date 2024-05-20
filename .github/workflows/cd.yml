@@ -28,7 +28,7 @@ jobs:
     - name: Verify deployment
       run: |
         for i in {1..5}; do
-          curl -f http://localhost:8080 && break
+          curl -f http://127.0.0.1:8080 && break
           echo "Attempt $i failed, retrying in 5 seconds..."
           sleep 5
         done
