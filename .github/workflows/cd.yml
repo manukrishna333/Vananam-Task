@@ -22,5 +22,14 @@ jobs:
         docker rm my-node-app || true
         docker run -d --name my-node-app -p 8080:8080 manukrishna333/my-node-app
 
+    - name: Wait for the application to start
+      run: sleep 30
+
     - name: Verify deployment
-      run: curl -f http://localhost:8080
+      run: |
+        for i in {1..10}; do
+          curl -f http://localhost:8080 && break
+          echo "Attempt $i failed, retrying in 5 seconds..."
+          sleep 5
+        done
+
