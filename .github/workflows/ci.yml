@@ -37,4 +37,4 @@ jobs:
       run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 
     - name: Push Docker image to DockerHub
-      run: docker push manukrishna333/my-node-app:latest
+      run: docker push manukrishna333/my-node-app
