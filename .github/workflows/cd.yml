@@ -14,13 +14,13 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Pull Docker image from DockerHub
-      run: docker pull manukrishna333/my-node-app
+      run: docker pull manukrishna333/my-node-app:latest
 
     - name: Deploy to staging
       run: |
         docker stop my-node-app || true
         docker rm my-node-app || true
-        docker run -d --name my-node-app -p 3000:3000 manukrishna333/my-node-app
+        docker run -d --name my-node-app -p 3000:3000 manukrishna333/my-node-app:latest
 
     - name: Wait for the application to start
       run: sleep 10
