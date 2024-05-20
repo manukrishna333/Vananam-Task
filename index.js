@@ -1,17 +1,14 @@
-# Use the official Node.js 14 image
-FROM node:14
+const http = require('http');
 
-# Set the working directory inside the container
-WORKDIR /app
+const hostname = '0.0.0.0';
+const port = 3000;
 
-# Install dependencies
-RUN npm install
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello, World!\n');
+});
 
-# Copy the rest of the application code
-COPY . .
-
-# Expose port 3000
-EXPOSE 3000
-
-# Command to run the application
-CMD ["node", "app.js"]
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
