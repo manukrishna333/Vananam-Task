@@ -1,15 +1,20 @@
-'use strict'
+# Use the official Node.js 14 image
+FROM node:14
 
-var express = require('../../');
+# Set the working directory inside the container
+WORKDIR /app
 
-var app = module.exports = express()
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
-app.get('/', function(req, res){
-  res.send('Hello World');
-});
+# Install dependencies
+RUN npm install
 
-/* istanbul ignore next */
-if (!module.parent) {
-  app.listen(3000);
-  console.log('Express started on port 3000');
-}
+# Copy the rest of the application code
+COPY . .
+
+# Expose port 3000
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "app.js"]
