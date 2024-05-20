@@ -22,9 +22,10 @@ jobs:
       run: npm install
 
     - name: Run tests
-      run: echo "Running tests..."
-      # Dummy test command
-      run: echo "Tests passed!"
+      run: |
+        echo "Running tests..."
+        # Dummy test command
+        echo "Tests passed!"
 
     - name: Build Docker image
       run: docker build -t my-node-app .
@@ -37,4 +38,3 @@ jobs:
 
     - name: Push Docker image to DockerHub
       run: docker push my-node-app
-
